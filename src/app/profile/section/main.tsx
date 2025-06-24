@@ -33,7 +33,7 @@ export default function MainSection() {
         </div>
 
         <div className="relative -mt-16 sm:-mt-0 z-50 w-full hero-animate">
-          <CompanyCards className="absolute left-1/2 -translate-x-1/2 -top-4 sm:-top-16 z-20 w-[100%] max-w-[320px] sm:max-w-[600px]" />
+          <CompanyCards className="absolute left-1/2 -translate-x-1/2 -top-4 sm:-top-16 z-20 w-[100%] max-w-[360px] sm:max-w-[600px]" />
         </div>
       </div>
       <section className="flex flex-col items-center text-center xl:items-start xl:text-left w-full md:mt-0 mt-32">
