@@ -27,13 +27,13 @@ export default function MainSection() {
         <div className="profile-img-container overflow-hidden relative z-10">
           <img
             src="/ngabroger.png"
-            className="relative w-auto border-red-600 max-w-sm sm:max-w-md xl:max-w-xl"
+            className="relative w-auto   sm:max-w-md xl:max-w-xl"
             alt="Roger Simanjuntak profile photo"
           />
         </div>
 
-        <div className="relative h-0 hero-animate z-50">
-          <CompanyCards className="absolute left-1/2 -translate-x-1/2 px-4 sm:px-6 md:px-0 -top-16 z-20 w-full max-w-[90vw] sm:max-w-[500px] md:max-w-[600px]" />
+        <div className="relative -mt-16 sm:-mt-0 z-50 w-full hero-animate">
+          <CompanyCards className="absolute left-1/2 -translate-x-1/2 -top-4 sm:-top-16 z-20 w-[100%] max-w-[320px] sm:max-w-[600px]" />
         </div>
       </div>
       <section className="flex flex-col items-center text-center xl:items-start xl:text-left w-full md:mt-0 mt-25">

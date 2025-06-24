@@ -25,13 +25,18 @@ export const CompanyCards: React.FC<CompanyCardsProps> = ({ className }) => {
   ];
 
   return (
-    <div className={cn('w-full sm:w-[500px] md:w-[600px] ', className)}>
-      <div className="bg-neutral-900/90 backdrop-blur-sm rounded-xl p-3 md:p-3 flex flex-row justify-around items-center">
+    <div className={cn('w-full px-4 sm:px-0 sm:max-w-[600px] md:w-[600px]', className)}>
+      <div className="bg-neutral-900/90 backdrop-blur-sm rounded-xl p-3 flex flex-row justify-between items-center shadow-lg">
         {companies.map((company) => (
-          <div key={company.name} className="flex flex-col items-center justify-center p-3 md:p-4">
-            <div className="mb-2">{company.icon}</div>
-            <h3 className="text-sm text-neutral-300 font-medium">{company.name}</h3>
-            <p className="text-white text-md md:text-lg font-semibold">{company.title}</p>
+          <div
+            key={company.name}
+            className="flex flex-col items-center justify-center py-1 px-2 sm:p-3 md:p-4"
+          >
+            <div className="mb-1">{company.icon}</div>
+            <h3 className="text-xs sm:text-sm text-neutral-300 font-medium">{company.name}</h3>
+            <p className="text-white text-xs sm:text-sm md:text-lg font-semibold whitespace-nowrap">
+              {company.title}
+            </p>
           </div>
         ))}
       </div>
