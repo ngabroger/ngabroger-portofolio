@@ -16,10 +16,10 @@ export default function MainSection() {
       </section>
 
       <div className="relative flex flex-col items-center xl:mb-0">
-        <div className="absolute -right-12 md:-right-8 top-8 md:top-12 z-30 bg-neutral-900/90 backdrop-blur-sm px-4 py-2 rounded-full border border-[#00fff7]/30 shadow-lg shadow-[#00fff7]/10 hero-animate">
+        <div className="absolute -right-4 md:-right-8 top-3 md:top-12 z-30 bg-neutral-900/90 backdrop-blur-sm px-4 py-2 rounded-full border border-[#00fff7]/30 shadow-lg shadow-[#00fff7]/10 hero-animate">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-[#00fff7] animate-pulse"></div>
-            <p className="text-sm font-medium text-white">Open to internship 🏢</p>
+            <p className="text-xs md:text-md  font-medium text-white">Open to internship 🏢</p>
           </div>
         </div>
 
@@ -36,7 +36,7 @@ export default function MainSection() {
           <CompanyCards className="absolute left-1/2 -translate-x-1/2 -top-4 sm:-top-16 z-20 w-[100%] max-w-[320px] sm:max-w-[600px]" />
         </div>
       </div>
-      <section className="flex flex-col items-center text-center xl:items-start xl:text-left w-full md:mt-0 mt-25">
+      <section className="flex flex-col items-center text-center xl:items-start xl:text-left w-full md:mt-0 mt-32">
         <div className="w-full xl:w-80 flex flex-col items-center xl:items-start rounded-xl xl:p-6 xl:mt-0 hero-animate">
           <h2 className="text-base text-neutral-200 mb-2">Services</h2>
           <p className="text-md font-medium text-white mb-4">
