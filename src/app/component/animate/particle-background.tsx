@@ -5,11 +5,18 @@ interface Particle {
   x: number;
   y: number;
   radius: number;
-  color: string;
+  opacity: number;
+}
+
+interface Comet {
+  x: number;
+  y: number;
   vx: number;
   vy: number;
+  length: number;
   opacity: number;
-  speedFactor: number;
+  life: number;
+  maxLife: number;
 }
 
 interface ParticlesBackgroundProps {
@@ -17,123 +24,186 @@ interface ParticlesBackgroundProps {
   color?: string;
   minSize?: number;
   maxSize?: number;
-  speed?: number;
   className?: string;
+  animate?: boolean;
+  cometCount?: number;
 }
 
 export function ParticlesBackground({
-  particleCount = 50,
-  color = '#00fff7',
-  minSize = 1,
-  maxSize = 3,
-  speed = 1,
+  particleCount = 120,
+  color = '255,255,255',
+  minSize = 0.3,
+  maxSize = 1.2,
   className = '',
+  animate = false,
+  cometCount = 2, // jumlah comet bersamaan
 }: ParticlesBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number | null>(null);
   const particlesRef = useRef<Particle[]>([]);
+  const cometsRef = useRef<Comet[]>([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Set canvas dimensions
+    // Set canvas size
     const handleResize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      
-      // Regenerate particles on resize
       initParticles();
     };
 
-    // Initialize particles
+    // Generate static star particles
     const initParticles = () => {
       particlesRef.current = Array.from({ length: particleCount }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         radius: minSize + Math.random() * (maxSize - minSize),
-        color: color,
-        vx: (Math.random() * 0.5 - 0.25) * speed,
-        vy: (Math.random() * 0.5 - 0.25) * speed,
-        opacity: Math.random() * 0.5 + 0.1,
-        speedFactor: 0.5 + Math.random() * 1.5,
+        opacity: Math.random() * 0.7 + 0.2,
       }));
     };
 
-    // Animation loop
-    const animate = () => {
+    // Spawn a new comet
+    const spawnComet = () => {
+      // Random spawn dari kiri/atas atau kanan/atas
+      const fromLeft = Math.random() < 0.5;
+      const startX = fromLeft
+        ? Math.random() * canvas.width * 0.3
+        : canvas.width - Math.random() * canvas.width * 0.3;
+      const startY = Math.random() * canvas.height * 0.2; // spawn dari atas (0-20% tinggi layar)
+      // Arah diagonal ke bawah (kanan bawah atau kiri bawah)
+      const angleBase = fromLeft ? Math.PI / 4 : (3 * Math.PI) / 4; // 45deg atau 135deg
+      const angle = angleBase + (Math.random() - 0.5) * (Math.PI / 8); // variasi sedikit
+      const speed = 3 + Math.random() * 2;
+      cometsRef.current.push({
+        x: startX,
+        y: startY,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        length: 80 + Math.random() * 40,
+        opacity: 0.7 + Math.random() * 0.3,
+        life: 0,
+        maxLife: canvas.height / Math.abs(Math.sin(angle)) + 100, // cukup panjang agar keluar layar
+      });
+    };
+
+    // Draw all particles and comets
+    const animateParticles = () => {
       if (!ctx || !canvas) return;
-      
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
+
+      // Draw stars
       particlesRef.current.forEach((p) => {
-        // Update position
-        p.x += p.vx * p.speedFactor;
-        p.y += p.vy * p.speedFactor;
-        
-        // Wrap particles at edges
-        if (p.x < -p.radius) p.x = canvas.width + p.radius;
-        if (p.x > canvas.width + p.radius) p.x = -p.radius;
-        if (p.y < -p.radius) p.y = canvas.height + p.radius;
-        if (p.y > canvas.height + p.radius) p.y = -p.radius;
-        
-        // Draw particle
+        if (animate) {
+          p.x += (Math.random() - 0.5) * 0.05;
+          p.y += (Math.random() - 0.5) * 0.05;
+          if (p.x < 0) p.x = canvas.width;
+          if (p.x > canvas.width) p.x = 0;
+          if (p.y < 0) p.y = canvas.height;
+          if (p.y > canvas.height) p.y = 0;
+        }
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = color.replace(')', `, ${p.opacity})`).replace('rgb', 'rgba');
+        ctx.fillStyle = `rgba(${color},${p.opacity})`;
+        ctx.shadowColor = `rgba(${color},${p.opacity})`;
+        ctx.shadowBlur = 2;
         ctx.fill();
-        
-        // Optional: connect nearby particles with lines
-        connectParticles(p);
       });
-      
-      animationRef.current = requestAnimationFrame(animate);
+
+      // Draw comets
+      cometsRef.current.forEach((c) => {
+        // Fade-in di awal (20 frame pertama)
+        const appearFrames = 20;
+        const fadeIn = Math.min(1, c.life / appearFrames);
+        const cometOpacity = c.opacity * fadeIn;
+
+        // Ekor (tail)
+        const grad = ctx.createLinearGradient(
+          c.x,
+          c.y,
+          c.x - c.vx * c.length,
+          c.y - c.vy * c.length
+        );
+        grad.addColorStop(0, `rgba(${color},${cometOpacity})`);
+        grad.addColorStop(1, `rgba(${color},0)`);
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(c.x, c.y);
+        ctx.lineTo(c.x - c.vx * c.length, c.y - c.vy * c.length);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 2.5;
+        ctx.shadowColor = `rgba(${color},${cometOpacity})`;
+        ctx.shadowBlur = 8;
+        ctx.stroke();
+        ctx.restore();
+
+        // Kepala (head)
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${color},${cometOpacity})`;
+        ctx.shadowColor = `rgba(${color},${cometOpacity})`;
+        ctx.shadowBlur = 12;
+        ctx.fill();
+        ctx.restore();
+
+        // Update posisi
+        c.x += c.vx;
+        c.y += c.vy;
+        c.life += 1;
+      });``
+
+      // Hapus comet yang sudah lewat
+      cometsRef.current = cometsRef.current.filter(
+        (c) =>
+          c.x > -250 &&
+          c.x < canvas.width + 250 &&
+          c.y > -150 &&
+          c.y < canvas.height + 250 &&
+          c.life < c.maxLife
+      );
+
+      if (
+        cometsRef.current.length < cometCount &&
+        Math.random() < 0.008 // lebih kecil = lebih jarang
+      ) {
+        spawnComet();
+      }
+
+      animationRef.current = requestAnimationFrame(animateParticles);
     };
-    
-    // Connect particles that are close to each other
-    const connectParticles = (particle: Particle) => {
-      const proximity = 100; // Max distance to connect particles
-      
-      particlesRef.current.forEach(p => {
-        const dx = particle.x - p.x;
-        const dy = particle.y - p.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        
-        if (distance < proximity) {
-          // Calculate opacity based on distance (closer = more opaque)
-          const opacity = 0.15 * (1 - distance / proximity);
-          
-          ctx.beginPath();
-          ctx.moveTo(particle.x, particle.y);
-          ctx.lineTo(p.x, p.y);
-          ctx.strokeStyle = color.replace(')', `, ${opacity})`).replace('rgb', 'rgba');
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
+
+    const drawParticles = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particlesRef.current.forEach((p) => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${color},${p.opacity})`;
+        ctx.shadowColor = `rgba(${color},${p.opacity})`;
+        ctx.shadowBlur = 2;
+        ctx.fill();
       });
     };
 
-    // Setup
     window.addEventListener('resize', handleResize);
     handleResize();
-    animate();
-    
-    // Cleanup
+
+    if (animate) {
+      animateParticles();
+    } else {
+      drawParticles();
+    }
+
     return () => {
       window.removeEventListener('resize', handleResize);
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [particleCount, color, minSize, maxSize, speed]);
+  }, [particleCount, color, minSize, maxSize, animate, cometCount]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className={`fixed inset-0 -z-10 pointer-events-none ${className}`}
-    />
+    <canvas ref={canvasRef} className={`fixed inset-0 -z-10 pointer-events-none ${className}`} />
   );
 }

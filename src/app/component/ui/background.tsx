@@ -11,18 +11,25 @@ export const Background = ({
   children?: React.ReactNode;
 }) => {
   return (
-    <div className={cn('fixed inset-0 -z-20 w-full', className)} {...rest} aria-hidden="true">
+    <div
+      className={cn('fixed inset-0 -z-20 w-full h-full', className)}
+      {...rest}
+      aria-hidden="true"
+    >
+      {/* Gradasi radial putih ke hitam */}
       <div
         className="absolute inset-0 w-full h-full"
         style={{
-          backgroundImage: "url('/bg_dark.svg')",
+          background:
+            'radial-gradient(ellipse at 70% 70%, rgba(255,255,255,0.25) 0%, rgba(0,0,0,1) 80%)',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          filter: 'blur(8px)',
+          filter: 'blur(0.5px)',
         }}
       />
-      <div className="relative z-10 w-full ">{children}</div>
+
+      <div className="relative z-10 w-full">{children}</div>
     </div>
   );
 };

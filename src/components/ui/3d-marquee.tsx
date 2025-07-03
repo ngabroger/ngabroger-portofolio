@@ -1,11 +1,21 @@
 'use client';
 
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
+import { IconX } from '@tabler/icons-react';
 
-export const ThreeDMarquee = ({ images, className }: { images: string[]; className?: string }) => {
+export const ThreeDMarquee = ({
+  images,
+  className,
+  title,
+}: {
+  images: string[];
+  className?: string;
+  title?: string;
+}) => {
   const [isMobile, setIsMobile] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -16,8 +26,20 @@ export const ThreeDMarquee = ({ images, className }: { images: string[]; classNa
 
     window.addEventListener('resize', handleResize);
 
+    // Close preview on ESC key
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedImage(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleEsc);
+
     // Cleanup
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('keydown', handleEsc);
+    };
   }, []);
 
   const columns = isMobile ? 3 : 4;
@@ -29,6 +51,13 @@ export const ThreeDMarquee = ({ images, className }: { images: string[]; classNa
 
   return (
     <div className={cn('w-full h-full overflow-hidden rounded-2xl', className)}>
+      {title && (
+        <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+          <div className="bg-black/40 backdrop-blur-sm px-8 py-4 rounded-xl shadow-xl">
+            <h1 className="text-white text-3xl md:text-5xl font-bold">{title}</h1>
+          </div>
+        </div>
+      )}
       <div className="flex w-full h-full items-center justify-center">
         <div className="w-full h-full">
           <div
@@ -37,7 +66,9 @@ export const ThreeDMarquee = ({ images, className }: { images: string[]; classNa
                 ? 'rotateX(55deg) rotateY(0deg) rotateZ(-45deg) scale(1.5)'
                 : 'rotateX(55deg) rotateY(0deg) rotateZ(-45deg)',
             }}
-            className={`relative top-[40%] right-[25%] grid w-full h-full origin-top-left gap-6 md:gap-8 transform-3d ${
+            className={`relative ${
+              isMobile ? 'top-[60%]' : 'top-[40%]'
+            } right-[25%] grid w-full h-full origin-top-left gap-6 md:gap-8 transform-3d ${
               isMobile ? 'grid-cols-3' : 'grid-cols-4'
             }`}
           >
@@ -67,11 +98,12 @@ export const ThreeDMarquee = ({ images, className }: { images: string[]; classNa
                       key={imageIndex + image}
                       src={image}
                       alt={`Image ${imageIndex + 1}`}
-                      className={`aspect-[970/700] rounded-lg object-cover ring ring-gray-950/5 hover:shadow-2xl ${
+                      className={`aspect-[970/700] rounded-lg object-cover ring ring-gray-950/5 hover:shadow-2xl cursor-pointer ${
                         isMobile ? 'w-[120px] md:w-auto' : ''
                       }`}
                       width={970}
                       height={700}
+                      onClick={() => setSelectedImage(image)}
                     />
                   </div>
                 ))}
@@ -80,6 +112,41 @@ export const ThreeDMarquee = ({ images, className }: { images: string[]; classNa
           </div>
         </div>
       </div>
+
+      {/* Image Preview Modal/Lightbox */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center"
+            onClick={() => setSelectedImage(null)}
+          >
+            <div
+              className="relative mb-24 max-w-2xl max-h-[60vh] w-[80%]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="absolute -top-10 right-0 text-white rounded-full p-1 hover:text-[#00fff7] transition-colors"
+                onClick={() => setSelectedImage(null)}
+              >
+                <IconX size={24} />
+              </button>
+
+              <motion.img
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                src={selectedImage}
+                alt="Preview"
+                className="w-full h-full object-contain rounded-lg shadow-2xl"
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

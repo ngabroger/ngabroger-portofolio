@@ -9,7 +9,14 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     <AnimatedNavigateProvider>
       <Background />
 
-      <ParticlesBackground color="#00fff7" particleCount={5} minSize={2} maxSize={5} speed={1} />
+      <ParticlesBackground
+        particleCount={120}
+        color="255,255,255"
+        minSize={0.3}
+        maxSize={1.2}
+        animate={true}
+        className="-z-10"
+      />
       {children}
       <FloatingDockDemo />
     </AnimatedNavigateProvider>

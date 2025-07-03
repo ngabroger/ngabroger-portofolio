@@ -37,7 +37,7 @@ export default function CertificatePage() {
   ];
   return (
     <div className="w-full h-screen bg-gray-950/5 dark:bg-neutral-800 ring-1 ring-neutral-700/10">
-      <ThreeDMarquee images={images} className="w-full h-full" />
+      <ThreeDMarquee images={images} className="w-full h-full" title="My Certificates" />
     </div>
   );
 }
