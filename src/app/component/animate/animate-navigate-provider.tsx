@@ -25,7 +25,6 @@ export function AnimatedNavigateProvider({ children }: { children: React.ReactNo
   const handleNavigate = useCallback(
     (url: string) => {
       if (cardRef.current) {
-        // Add this to track navigation to profile
         if (url.includes('/profile')) {
           localStorage.setItem('navigatingToProfile', 'true');
         }

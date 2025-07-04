@@ -1,7 +1,9 @@
 'use client';
 import React from 'react';
 import { cn } from '@/lib/utils';
+import { ParticlesBackground } from '@/app/component/animate/particle-background';
 
+import { Meteors } from '@/components/magicui/meteors';
 export const Background = ({
   className,
   children,
@@ -16,7 +18,7 @@ export const Background = ({
       {...rest}
       aria-hidden="true"
     >
-      {/* Gradasi radial putih ke hitam */}
+      {/* Gradasi radial */}
       <div
         className="absolute inset-0 w-full h-full"
         style={{
@@ -28,7 +30,8 @@ export const Background = ({
           filter: 'blur(0.5px)',
         }}
       />
-
+      <ParticlesBackground animate={true} />
+      <Meteors number={8} minDelay={1.5} maxDelay={4} minDuration={3} maxDuration={8} />
       <div className="relative z-10 w-full">{children}</div>
     </div>
   );

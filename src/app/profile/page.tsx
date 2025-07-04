@@ -6,8 +6,6 @@ import ProfileAnimationController from '@/app/component/animate/profile-animatio
 import { useProfileNavigate } from '@/app/component/animate/animate-navigate-provider';
 
 export default function ProfilePage() {
-  const { animateNavigate } = useProfileNavigate();
-
   // Preload critical assets
   useEffect(() => {
     const img = new Image();
@@ -18,7 +16,7 @@ export default function ProfilePage() {
     <ProfileAnimationController>
       <div className="flex flex-col items-center justify-center bg-transparent min-h-screen pb-24 profile-page-container w-full overflow-x-hidden">
         <MainSection />
-        <div className="w-full max-w-5xl mx-auto  md:px-8 mt-16 min-h-screen">
+        <div className="w-full   overflow-hidden relative">
           <SkillSection />
         </div>
       </div>

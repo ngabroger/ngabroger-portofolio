@@ -1,11 +1,47 @@
+'use client';
+import { useLayoutEffect, useState } from 'react';
+import { Sidebar } from '../component/ui/sidebar';
+import { Grid } from '../component/ui/component-grid';
+import { useAnimatedNavigate } from '../component/animate/animate-navigate-provider';
+import gsap from 'gsap';
+const categories = ['Web', 'Mobile'];
+const certificates = [
+  { name: 'Certificate 1', category: 'Web' },
+  { name: 'Certificate 2', category: 'Web' },
+  { name: 'Certificate 3', category: 'Web' },
+  { name: 'Certificate 4', category: 'Mobile' },
+  { name: 'Certificate 5', category: 'Mobile' },
+];
+
 export default function ProjectsPage() {
+  const [selected, setSelected] = useState('Web');
+  const { cardRef } = useAnimatedNavigate();
+
+  useLayoutEffect(() => {
+    if (cardRef.current) {
+      gsap.fromTo(
+        cardRef.current,
+        { y: 1500, opacity: 0, rotateY: 180 },
+        { y: 0, opacity: 1, duration: 2, rotateY: 0, ease: 'power3.out' }
+      );
+    }
+  }, [cardRef]);
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-8">
-      <h1 className="text-4xl font-bold mb-4">Projects Page</h1>
-      <p className="text-lg text-gray-600 mb-8 text-center max-w-xl">
-        This is the Projects page. You can add your project details here.
-      </p>
-      {/* Add your project content here */}
+    <div className="w-full min-h-screen flex items-center overflow-hidden justify-center bg-gray-950/5 dark:bg-neutral-800 ring-1 ring-neutral-700/10">
+      <div
+        ref={cardRef}
+        className="w-[90vw] max-w-6xl h-[80vh] bg-neutral-900 rounded-2xl flex overflow-hidden shadow-xl border border-neutral-700"
+      >
+        <Sidebar
+          categories={categories}
+          selected={selected}
+          setSelected={setSelected}
+          title="my Project.-"
+        />
+        <div className="flex-1 flex items-center justify-center px-6 py-8">
+          <Grid items={certificates.filter((c) => c.category === selected)} emptyCount={15} />
+        </div>
+      </div>
     </div>
   );
 }

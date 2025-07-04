@@ -1,157 +1,180 @@
-import { OrbitingCircles } from '@/components/magicui/orbiting-circles';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import {
-  IconBrandGithub,
-  IconBrandReact,
-  IconBrandNextjs,
-  IconBrandTypescript,
-  IconBrandTailwind,
-  IconBrandNodejs,
-  IconBrandFigma,
-  IconBrandJavascript,
-  IconBrandCss3,
-  IconBrandHtml5,
-  IconBrandKotlin,
   IconBrandFlutter,
+  IconBrandGithub,
+  IconBrandKotlin,
   IconBrandLaravel,
-  IconBrandPhp,
-  IconDeviceMobile,
-  IconPalette,
-  IconBrandVue,
-  IconWorld,
-  IconBrandAws,
+  IconBrandNextjs,
+  IconBrandReact,
+  IconBrandReactNative,
+  IconServer,
+  IconTools,
 } from '@tabler/icons-react';
-import React from 'react';
+import { BentoCard, BentoGrid } from '@/components/magicui/bento-grid';
 
-const IconWithLabel = ({ icon }: { icon: React.ReactNode; label: string }) => {
-  return React.cloneElement(icon as React.ReactElement, {});
-};
+const skills = [
+  {
+    name: 'React',
+    category: 'Web',
+    description: 'Membangun antarmuka web interaktif dan modern dengan React JS.',
+    Icon: IconBrandReact,
+    background: <div className="absolute inset-0 bg-blue-100 opacity-20" />,
+    href: '#',
+    className: 'col-span-3 lg:col-span-2',
+    cta: 'Learn More',
+  },
+  {
+    name: 'Next.js',
+    category: 'Web',
+    description: 'Framework React untuk aplikasi web SSR, SSG, dan fullstack yang efisien.',
+    Icon: IconBrandNextjs,
+    background: <div className="absolute inset-0 bg-blue-100 opacity-20" />,
+    href: '#',
+    className: 'col-span-3 lg:col-span-1',
+    cta: 'Learn More',
+  },
+  {
+    name: 'Laravel',
+    category: 'Web',
+    description: 'Membangun backend dan REST API yang powerful dengan Laravel PHP.',
+    Icon: IconBrandLaravel,
+    background: <div className="absolute inset-0 bg-blue-100 opacity-20" />,
+    href: '#',
+    className: 'col-span-3 lg:col-span-3',
+    cta: 'Learn More',
+  },
+  {
+    name: 'Kotlin',
+    category: 'Mobile',
+    description: 'Pengembangan aplikasi Android native yang modern dan aman dengan Kotlin.',
+    Icon: IconBrandKotlin,
+    background: <div className="absolute inset-0 bg-green-100 opacity-20" />,
+    href: '#',
+    className: 'col-span-3 lg:col-span-3',
+    cta: 'Learn More',
+  },
+  {
+    name: 'Flutter',
+    category: 'Mobile',
+    description: 'Membuat aplikasi cross-platform (Android & iOS) dengan Flutter dan Dart.',
+    Icon: IconBrandFlutter,
+    background: <div className="absolute inset-0 bg-green-100 opacity-20" />,
+    href: '#',
+    className: 'col-span-3 lg:col-span-1',
+    cta: 'Learn More',
+  },
+  {
+    name: 'React Native',
+    category: 'Mobile',
+    description: 'Membangun aplikasi mobile multiplatform dengan React Native.',
+    Icon: IconBrandReactNative,
+    background: <div className="absolute inset-0 bg-green-100 opacity-20" />,
+    href: '#',
+    className: 'col-span-3 lg:col-span-2',
+    cta: 'Learn More',
+  },
+  {
+    name: 'Figma',
+    category: 'Etc',
+    description: 'Merancang UI/UX dan prototyping aplikasi secara kolaboratif dengan Figma.',
+    Icon: IconTools,
+    background: <div className="absolute inset-0 bg-yellow-100 opacity-20" />,
+    href: '#',
+    className: 'col-span-3 lg:col-span-1',
+    cta: 'Learn More',
+  },
+  {
+    name: 'Github',
+    category: 'Etc',
+    description: 'Kolaborasi dan version control project menggunakan Git & Github.',
+    Icon: IconBrandGithub,
+    background: <div className="absolute inset-0 bg-yellow-100 opacity-20" />,
+    href: '#',
+    className: 'col-span-3 lg:col-span-2',
+    cta: 'Learn More',
+  },
+  {
+    name: 'Server',
+    category: 'Etc',
+    description: 'Deploy, konfigurasi, dan maintenance server untuk aplikasi web & mobile.',
+    Icon: IconServer,
+    background: <div className="absolute inset-0 bg-yellow-100 opacity-20" />,
+    href: '#',
+    className: 'col-span-3 lg:col-span-3',
+    cta: 'Learn More',
+  },
+];
 
+const categories = ['Web', 'Mobile', 'Etc'];
 export default function SkillSection() {
+  const [selected, setSelected] = useState('Web');
+
   return (
-    <div className="relative overflow-hidden h-screen w-full max-w-5xl mx-auto my-16 flex items-center justify-center">
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="text-center z-30">
-          <h2 className="text-3xl font-bold mb-2 text-white">My Skills</h2>
-          <p className="text-neutral-300 max-w-md mx-auto">
-            Technologies and tools I work with to bring ideas to life
-          </p>
-        </div>
-      </div>
+    <div className="relative overflow-hidden h-fit w-full max-w-screen mx-auto flex flex-col items-center justify-start mt-52">
+      <motion.h2
+        key="my-skills-title"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, type: 'spring' }}
+        className="text-3xl font-bold mb-6 text-white z-30"
+      >
+        My Skills
+      </motion.h2>
 
-      {/* 1. WEB DEVELOPMENT ORBIT */}
-      <div className="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2 orbit-animate">
-        <OrbitingCircles
-          radius={180}
-          duration={30}
-          pathStyle="dashed"
-          iconSize={40}
-          iconColor="#00fff7"
-          center={
-            <div className="flex flex-col items-center justify-center w-20 h-20 rounded-full bg-neutral-900/90 border border-[#00fff7]/30 shadow-lg shadow-[#00fff7]/10">
-              <IconWorld size={32} stroke={1.5} className="text-[#00fff7]" />
-            </div>
-          }
-        >
-          <IconWithLabel
-            icon={<IconBrandReact size={24} className="text-[#00fff7]" />}
-            label="React"
-          />
-          <IconWithLabel
-            icon={<IconBrandNextjs size={24} className="text-[#00fff7]" />}
-            label="Next.js"
-          />
-          <IconWithLabel
-            icon={<IconBrandVue size={24} className="text-[#00fff7]" />}
-            label="Vue.js"
-          />
-          <IconWithLabel
-            icon={<IconBrandTypescript size={24} className="text-[#00fff7]" />}
-            label="TypeScript"
-          />
-          <IconWithLabel
-            icon={<IconBrandJavascript size={24} className="text-[#00fff7]" />}
-            label="JavaScript"
-          />
-          <IconWithLabel
-            icon={<IconBrandHtml5 size={24} className="text-[#00fff7]" />}
-            label="HTML5"
-          />
-          <IconWithLabel
-            icon={<IconBrandCss3 size={24} className="text-[#00fff7]" />}
-            label="CSS3"
-          />
-          <IconWithLabel
-            icon={<IconBrandNodejs size={24} className="text-[#00fff7]" />}
-            label="Node.js"
-          />
-          <IconWithLabel
-            icon={<IconBrandLaravel size={24} className="text-[#00fff7]" />}
-            label="Laravel"
-          />
-          <IconWithLabel icon={<IconBrandPhp size={24} className="text-[#00fff7]" />} label="PHP" />
-        </OrbitingCircles>
+      <div className=" flex gap-4 z-30">
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setSelected(cat)}
+            className={`px-4 py-2 rounded-full font-semibold transition ${
+              selected === cat
+                ? 'bg-white text-black shadow'
+                : 'bg-neutral-800 text-white hover:bg-neutral-700'
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
       </div>
-
-      {/* 2. DESIGN ORBIT */}
-      <div className="absolute top-1/3 right-1/4 transform translate-x-1/2 orbit-animate">
-        <OrbitingCircles
-          radius={150}
-          speed={1.5}
-          pathColor="stroke-[#FF66CC]/10"
-          pathStyle="dotted"
-          iconSize={36}
-          iconColor="#FF66CC"
-          reverse
-          center={
-            <div className="flex flex-col items-center justify-center w-20 h-20 rounded-full bg-neutral-900/90 border border-[#FF66CC]/30 shadow-lg shadow-[#FF66CC]/10">
-              <IconPalette size={32} stroke={1.5} className="text-[#FF66CC]" />
-            </div>
-          }
-        >
-          <IconWithLabel
-            icon={<IconBrandFigma size={22} className="text-[#FF66CC]" />}
-            label="Figma"
-          />
-          <IconWithLabel
-            icon={<IconBrandTailwind size={22} className="text-[#FF66CC]" />}
-            label="Tailwind CSS"
-          />
-        </OrbitingCircles>
-      </div>
-
-      {/* 3. MOBILE DEVELOPMENT ORBIT */}
-      <div className="absolute bottom-1/3 right-1/3 transform translate-x-1/4 translate-y-1/4 orbit-animate">
-        <OrbitingCircles
-          radius={160}
-          speed={1.2}
-          pathStyle="solid"
-          pathColor="stroke-[#66CCFF]/10"
-          iconSize={38}
-          iconColor="#66CCFF"
-          glow={true}
-          center={
-            <div className="flex flex-col items-center justify-center w-20 h-20 rounded-full bg-neutral-900/90 border border-[#66CCFF]/30 shadow-lg shadow-[#66CCFF]/10">
-              <IconDeviceMobile size={32} stroke={1.5} className="text-[#66CCFF]" />
-            </div>
-          }
-        >
-          <IconWithLabel
-            icon={<IconBrandFlutter size={24} className="text-[#66CCFF]" />}
-            label="Flutter"
-          />
-          <IconWithLabel
-            icon={<IconBrandKotlin size={24} className="text-[#66CCFF]" />}
-            label="Kotlin"
-          />
-          <IconWithLabel
-            icon={<IconBrandReact size={24} className="text-[#66CCFF]" />}
-            label="React Native"
-          />
-          <IconWithLabel
-            icon={<IconBrandGithub size={24} className="text-[#66CCFF]" />}
-            label="GitHub"
-          />
-        </OrbitingCircles>
+      <div className="w-full">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={selected}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.4 }}
+          >
+            <BentoGrid className="z-20 p-25">
+              {skills
+                .filter((s) => s.category === selected)
+                .map((skill, idx) => (
+                  <BentoCard
+                    key={`${skill.name}-${skill.category}-${idx}`}
+                    name={skill.name}
+                    background={skill.background}
+                    Icon={(props) => (
+                      <skill.Icon
+                        {...props}
+                        color={
+                          skill.category === 'Web'
+                            ? '#2563eb'
+                            : skill.category === 'Mobile'
+                            ? '#22c55e'
+                            : '#eab308'
+                        }
+                      />
+                    )}
+                    description={skill.description}
+                    href={skill.href}
+                    className={skill.className}
+                    cta={skill.cta}
+                  />
+                ))}
+            </BentoGrid>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

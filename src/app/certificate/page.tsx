@@ -1,43 +1,52 @@
 'use client';
-import { ThreeDMarquee } from '@/components/ui/3d-marquee';
+import { useLayoutEffect, useRef, useState } from 'react';
+import { Sidebar } from '../component/ui/sidebar';
+import { Grid } from '../component/ui/component-grid';
+import gsap from 'gsap';
+import { useAnimatedNavigate } from '../component/animate/animate-navigate-provider';
+const categories = ['Web', 'Mobile', 'Etc'];
+const certificates = [
+  { name: 'Certificate 1', category: 'Web' },
+  { name: 'Certificate 2', category: 'Web' },
+  { name: 'Certificate 3', category: 'Web' },
+  { name: 'Certificate 4', category: 'Mobile' },
+  { name: 'Certificate 5', category: 'Mobile' },
+  { name: 'Certificate 6', category: 'Etc' },
+  { name: 'Certificate 7', category: 'Etc' },
+  { name: 'Certificate 8', category: 'Etc' },
+  // dst...
+];
 
 export default function CertificatePage() {
-  const images = [
-    'https://assets.aceternity.com/cloudinary_bkp/3d-card.png',
-    'https://assets.aceternity.com/animated-modal.png',
-    'https://assets.aceternity.com/animated-testimonials.webp',
-    'https://assets.aceternity.com/cloudinary_bkp/Tooltip_luwy44.png',
-    'https://assets.aceternity.com/github-globe.png',
-    'https://assets.aceternity.com/glare-card.png',
-    'https://assets.aceternity.com/layout-grid.png',
-    'https://assets.aceternity.com/flip-text.png',
-    'https://assets.aceternity.com/hero-highlight.png',
-    'https://assets.aceternity.com/carousel.webp',
-    'https://assets.aceternity.com/placeholders-and-vanish-input.png',
-    'https://assets.aceternity.com/shooting-stars-and-stars-background.png',
-    'https://assets.aceternity.com/signup-form.png',
-    'https://assets.aceternity.com/cloudinary_bkp/stars_sxle3d.png',
-    'https://assets.aceternity.com/spotlight-new.webp',
-    'https://assets.aceternity.com/cloudinary_bkp/Spotlight_ar5jpr.png',
-    'https://assets.aceternity.com/cloudinary_bkp/Parallax_Scroll_pzlatw_anfkh7.png',
-    'https://assets.aceternity.com/tabs.png',
-    'https://assets.aceternity.com/cloudinary_bkp/Tracing_Beam_npujte.png',
-    'https://assets.aceternity.com/cloudinary_bkp/typewriter-effect.png',
-    'https://assets.aceternity.com/glowing-effect.webp',
-    'https://assets.aceternity.com/hover-border-gradient.png',
-    'https://assets.aceternity.com/cloudinary_bkp/Infinite_Moving_Cards_evhzur.png',
-    'https://assets.aceternity.com/cloudinary_bkp/Lamp_hlq3ln.png',
-    'https://assets.aceternity.com/macbook-scroll.png',
-    'https://assets.aceternity.com/cloudinary_bkp/Meteors_fye3ys.png',
-    'https://assets.aceternity.com/cloudinary_bkp/Moving_Border_yn78lv.png',
-    'https://assets.aceternity.com/multi-step-loader.png',
-    'https://assets.aceternity.com/vortex.png',
-    'https://assets.aceternity.com/wobble-card.png',
-    'https://assets.aceternity.com/world-map.webp',
-  ];
+  const [selected, setSelected] = useState('Web');
+  const { cardRef } = useAnimatedNavigate();
+
+  useLayoutEffect(() => {
+    if (cardRef.current) {
+      gsap.fromTo(
+        cardRef.current,
+        { y: 1500, opacity: 0, rotateY: 180 },
+        { y: 0, opacity: 1, duration: 2, rotateY: 0, ease: 'power3.out' }
+      );
+    }
+  }, [cardRef]);
+
   return (
-    <div className="w-full h-screen bg-gray-950/5 dark:bg-neutral-800 ring-1 ring-neutral-700/10">
-      <ThreeDMarquee images={images} className="w-full h-full" title="My Certificates" />
+    <div className="w-full min-h-screen flex items-center justify-center overflow-hidden bg-gray-950/5 dark:bg-neutral-800 ring-1 ring-neutral-700/10">
+      <div
+        ref={cardRef}
+        className="w-[90vw] max-w-6xl h-[80vh] bg-neutral-900 rounded-2xl flex  shadow-xl border border-neutral-700"
+      >
+        <Sidebar
+          categories={categories}
+          selected={selected}
+          setSelected={setSelected}
+          title="my certificate.-"
+        />
+        <div className="flex-1 flex items-center justify-center px-6 py-8">
+          <Grid items={certificates.filter((c) => c.category === selected)} emptyCount={15} />
+        </div>
+      </div>
     </div>
   );
 }
