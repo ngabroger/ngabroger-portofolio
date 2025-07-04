@@ -31,7 +31,7 @@ export const Background = ({
         }}
       />
       <ParticlesBackground animate={true} />
-      <Meteors number={8} minDelay={1.5} maxDelay={4} minDuration={3} maxDuration={8} />
+      <Meteors number={12} minDelay={1.5} maxDelay={4} minDuration={3} maxDuration={8} />
       <div className="relative z-10 w-full">{children}</div>
     </div>
   );
