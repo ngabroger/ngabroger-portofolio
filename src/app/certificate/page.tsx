@@ -1,9 +1,9 @@
 'use client';
 import { useLayoutEffect, useRef, useState } from 'react';
-import { Sidebar } from '../component/ui/sidebar';
-import { Grid } from '../component/ui/component-grid';
+import { Sidebar } from '../../components/ui/sidebar';
+import { Grid } from '../../components/ui/component-grid';
 import gsap from 'gsap';
-import { useAnimatedNavigate } from '../component/animate/animate-navigate-provider';
+import { useAnimatedNavigate } from '../../components/animate/animate-navigate-provider';
 const categories = ['Web', 'Mobile', 'Etc'];
 const certificates = [
   { name: 'Certificate 1', category: 'Web' },

@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { ParticlesBackground } from '@/app/component/animate/particle-background';
+import { ParticlesBackground } from '@/components/animate/particle-background';
 
 import { Meteors } from '@/components/magicui/meteors';
 export const Background = ({

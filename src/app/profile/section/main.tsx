@@ -1,6 +1,6 @@
-import { CircleItem } from '@/app/component/ui/circle-item';
-import { CompanyCards } from '@/app/component/ui/company-card';
-import { SocialLinks } from '@/app/component/animate/social-item';
+import { CircleItem } from '@/components/ui/circle-item';
+import { CompanyCards } from '@/components/ui/company-card';
+import { SocialLinks } from '@/components/animate/social-item';
 export default function MainSection() {
   return (
     <div className="relative flex flex-col xl:flex-row items-center justify-center gap-0 xl:gap-8 w-full max-w-6xl mt-12 px-4">

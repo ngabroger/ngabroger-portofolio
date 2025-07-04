@@ -2,8 +2,8 @@
 import { useEffect } from 'react';
 import MainSection from './section/main';
 import SkillSection from './section/skill';
-import ProfileAnimationController from '@/app/component/animate/profile-animation-controller';
-import { useProfileNavigate } from '@/app/component/animate/animate-navigate-provider';
+import ProfileAnimationController from '@/components/animate/profile-animation-controller';
+import { useProfileNavigate } from '@/components/animate/animate-navigate-provider';
 
 export default function ProfilePage() {
   // Preload critical assets

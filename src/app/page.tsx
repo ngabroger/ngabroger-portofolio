@@ -1,4 +1,4 @@
-import { ThreeDCardDemo } from '@/app/component/ui/threed-card'; // Import komponen 3D Card
+import { ThreeDCardDemo } from '@/components/ui/threed-card'; // Import komponen 3D Card
 
 export default function Home() {
   return (

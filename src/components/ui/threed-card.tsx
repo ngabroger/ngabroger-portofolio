@@ -1,9 +1,9 @@
 'use client';
-import { MovingBorder } from '@/app/component/animate/moving-border';
+import { MovingBorder } from '@/components/animate/moving-border';
 import React, { useLayoutEffect } from 'react';
-import { CardBody, CardContainer, CardItem } from '@/app/component/ui/3d-card'; // Pastikan path ini benar
+import { CardBody, CardContainer, CardItem } from '@/components/ui/3d-card'; // Pastikan path ini benar
 import gsap from 'gsap';
-import { useAnimatedNavigate } from '@/app/component/animate/animate-navigate-provider';
+import { useAnimatedNavigate } from '@/components/animate/animate-navigate-provider';
 export function ThreeDCardDemo() {
   const { cardRef, handleNavigate } = useAnimatedNavigate();
 
