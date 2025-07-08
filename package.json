@@ -20,7 +20,7 @@
     "lucide-react": "^0.522.0",
     "motion": "^12.18.1",
     "next": "15.3.4",
-    "pdfjs-dist": "^3.11.174",
+    "pdfjs-dist": "^4.8.69",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-pdf": "^9.2.1",
