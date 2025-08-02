@@ -35,10 +35,9 @@ export function ThreeDCardDemo() {
               translateZ={60}
               className="text-neutral-200 text-sm sm:text-base max-w-xl mb-6 text-justify"
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lobortis pharetra
-              nulla, sed vehicula sapien. Suspendisse vitae varius ligula, fermentum sagittis
-              sapien. Pellentesque vulputate consequat laoreet. Cras vel ornare nunc. Sed in sodales
-              eros. Aliquam sit amet risus vitae felis aliquam pellentesque vel quis dolor.
+              Welcome to Roger Simanjuntak's digital playground! 🚀 Here you'll find my profile,
+              projects, and ways to connect. If you like what you see, don't be shy—reach out and
+              say hi (or just tell me you like me, hehe)! Enjoy exploring!
             </CardItem>
             <div className="flex  sm:flex-row justify-center gap-6 sm:justify-start sm:gap-8 mt-4">
               <div className="relative w-fit">

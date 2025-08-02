@@ -12,12 +12,12 @@ import {
   IconTools,
 } from '@tabler/icons-react';
 import { BentoCard, BentoGrid } from '@/components/magicui/bento-grid';
-
 const skills = [
   {
     name: 'React',
     category: 'Web',
-    description: 'Membangun antarmuka web interaktif dan modern dengan React JS.',
+    description:
+      'I whip up interactive, modern web apps with React—think pixel-perfect, lightning-fast, and a dash of magic.',
     Icon: IconBrandReact,
     background: <div className="absolute inset-0 bg-blue-100 opacity-20" />,
     href: '#',
@@ -27,7 +27,8 @@ const skills = [
   {
     name: 'Next.js',
     category: 'Web',
-    description: 'Framework React untuk aplikasi web SSR, SSG, dan fullstack yang efisien.',
+    description:
+      'SSR, SSG, fullstack? Next.js is my secret sauce for web apps that are speedy, smart, and always fresh out of the oven.',
     Icon: IconBrandNextjs,
     background: <div className="absolute inset-0 bg-blue-100 opacity-20" />,
     href: '#',
@@ -37,7 +38,8 @@ const skills = [
   {
     name: 'Laravel',
     category: 'Web',
-    description: 'Membangun backend dan REST API yang powerful dengan Laravel PHP.',
+    description:
+      'I conjure powerful backends and REST APIs with Laravel—like a wizard, but with PHP and artisan commands.',
     Icon: IconBrandLaravel,
     background: <div className="absolute inset-0 bg-blue-100 opacity-20" />,
     href: '#',
@@ -47,7 +49,8 @@ const skills = [
   {
     name: 'Kotlin',
     category: 'Mobile',
-    description: 'Pengembangan aplikasi Android native yang modern dan aman dengan Kotlin.',
+    description:
+      'Android apps? Kotlin lets me build them sleek, safe, and snappy—no bugs allowed in my playground!',
     Icon: IconBrandKotlin,
     background: <div className="absolute inset-0 bg-green-100 opacity-20" />,
     href: '#',
@@ -57,7 +60,8 @@ const skills = [
   {
     name: 'Flutter',
     category: 'Mobile',
-    description: 'Membuat aplikasi cross-platform (Android & iOS) dengan Flutter dan Dart.',
+    description:
+      'One codebase, two platforms! Flutter helps me craft beautiful apps for Android & iOS—like magic, but with widgets.',
     Icon: IconBrandFlutter,
     background: <div className="absolute inset-0 bg-green-100 opacity-20" />,
     href: '#',
@@ -67,7 +71,8 @@ const skills = [
   {
     name: 'React Native',
     category: 'Mobile',
-    description: 'Membangun aplikasi mobile multiplatform dengan React Native.',
+    description:
+      'React Native is my toolkit for building mobile apps that run everywhere—code once, party twice!',
     Icon: IconBrandReactNative,
     background: <div className="absolute inset-0 bg-green-100 opacity-20" />,
     href: '#',
@@ -77,7 +82,8 @@ const skills = [
   {
     name: 'Figma',
     category: 'Etc',
-    description: 'Merancang UI/UX dan prototyping aplikasi secara kolaboratif dengan Figma.',
+    description:
+      'Designing UI/UX in Figma is like playing with digital LEGO—collaborative, creative, and always fun!',
     Icon: IconTools,
     background: <div className="absolute inset-0 bg-yellow-100 opacity-20" />,
     href: '#',
@@ -87,7 +93,8 @@ const skills = [
   {
     name: 'Github',
     category: 'Etc',
-    description: 'Kolaborasi dan version control project menggunakan Git & Github.',
+    description:
+      'GitHub is my multiplayer mode for coding—version control, teamwork, and a sprinkle of commit messages.',
     Icon: IconBrandGithub,
     background: <div className="absolute inset-0 bg-yellow-100 opacity-20" />,
     href: '#',
@@ -97,7 +104,8 @@ const skills = [
   {
     name: 'Server',
     category: 'Etc',
-    description: 'Deploy, konfigurasi, dan maintenance server untuk aplikasi web & mobile.',
+    description:
+      'Deploying and maintaining servers? I treat it like leveling up in a game—config, deploy, and keep everything running smooth!',
     Icon: IconServer,
     background: <div className="absolute inset-0 bg-yellow-100 opacity-20" />,
     href: '#',
@@ -146,7 +154,7 @@ export default function SkillSection() {
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.4 }}
           >
-            <BentoGrid className="z-20 p-25">
+            <BentoGrid className="z-20 p-12 md:p-25">
               {skills
                 .filter((s) => s.category === selected)
                 .map((skill, idx) => (

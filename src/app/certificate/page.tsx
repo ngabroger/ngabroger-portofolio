@@ -1,12 +1,12 @@
 'use client';
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
+import { motion } from 'motion/react';
 import { Sidebar } from '../../components/ui/sidebar';
 import { Grid } from '../../components/ui/component-grid';
 import gsap from 'gsap';
 import { certificates } from '@/app/data/certificates';
 import { useAnimatedNavigate } from '../../components/animate/animate-navigate-provider';
 const categories = ['Web', 'Mobile', 'Etc'];
-
 
 export default function CertificatePage() {
   const [selected, setSelected] = useState('Web');
@@ -55,7 +55,13 @@ export default function CertificatePage() {
           </div>
         </div>
         {/* Grid */}
-        <div className="flex-1 flex items-center justify-center px-2 md:px-6 py-4 md:py-8">
+        <motion.div
+          key={selected}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, type: 'spring' }}
+          className="flex-1 flex items-center justify-center px-2 md:px-6 py-4 md:py-8"
+        >
           <Grid
             items={certificates
               .filter((c) => c.category === selected)
@@ -64,7 +70,7 @@ export default function CertificatePage() {
                 img,
               }))}
           />
-        </div>
+        </motion.div>
       </div>
     </div>
   );

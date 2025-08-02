@@ -13,22 +13,22 @@ const socialItems = [
   {
     title: 'Facebook',
     icon: <IconBrandFacebook size={24} stroke={2} />,
-    href: '#',
+    href: 'https://www.facebook.com/flyrog/',
   },
   {
     title: 'GitHub',
     icon: <IconBrandGithub size={24} stroke={2} />,
-    href: '#',
+    href: 'https://github.com/ngabroger',
   },
   {
     title: 'Instagram',
     icon: <IconBrandInstagram size={24} stroke={2} />,
-    href: '#',
+    href: 'https://www.instagram.com/ngabroger/',
   },
   {
     title: 'LinkedIn',
     icon: <IconBrandLinkedin size={24} stroke={2} />,
-    href: '#',
+    href: 'https://www.linkedin.com/in/ngabroger/',
   },
 ];
 export const SocialLinks = ({ className }: { className?: string }) => {

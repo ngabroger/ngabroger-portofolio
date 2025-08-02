@@ -28,42 +28,14 @@ export default function ProjectsPage() {
   }, [cardRef]);
   return (
     <div className="w-full min-h-screen flex items-center justify-center overflow-hidden bg-gray-950/5 dark:bg-neutral-800 ring-1 ring-neutral-700/10">
-      <div
-        ref={cardRef}
-        className="w-[98vw] max-w-6xl h-[80vh] bg-neutral-900 rounded-2xl flex flex-col md:flex-row shadow-xl border border-neutral-700"
-      >
-        {/* Sidebar hanya tampil di desktop */}
-        <div className="hidden md:flex">
-          <Sidebar
-            categories={categories}
-            selected={selected}
-            setSelected={setSelected}
-            title="my project.-"
-          />
-        </div>
-        {/* Tab kategori di atas grid, hanya tampil di mobile */}
-        <div className="md:hidden w-full flex flex-col items-center pt-6">
-          <span className="text-white font-bold text-xl mb-4">my project.-</span>
-          <div className="flex gap-2 mb-4">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelected(cat)}
-                className={`px-3 py-1 rounded-full font-semibold transition text-sm ${
-                  selected === cat
-                    ? 'bg-white text-black shadow'
-                    : 'bg-neutral-800 text-white hover:bg-neutral-700'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
-        {/* Grid */}
-        <div className="flex-1 flex items-center justify-center px-2 md:px-6 py-4 md:py-8">
-          <Grid items={certificates.filter((c) => c.category === selected)} emptyCount={15} />
-        </div>
+      <div>
+        <h2 className="text-3xl font-bold text-white text-center mt-10 mb-4">
+          Nothing I can show you right now
+        </h2>
+        <p className="text-neutral-400 max-w-2xl text-center mb-10">
+          I tried to add my projects here, but there are just too many! If I put them all, this
+          website might crash from sheer awesomeness. Maybe next time!
+        </p>
       </div>
     </div>
   );

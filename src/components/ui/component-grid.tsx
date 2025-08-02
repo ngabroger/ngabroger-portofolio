@@ -1,5 +1,6 @@
 import React from 'react';
 import { CardContainer, CardBody, CardItem } from '@/components/ui/3d-card';
+import { motion } from 'motion/react';
 
 export function Grid({ items }: { items: { name: string; img?: string }[] }) {
   const [previewImg, setPreviewImg] = React.useState<string | null>(null);
@@ -31,16 +32,23 @@ export function Grid({ items }: { items: { name: string; img?: string }[] }) {
         ))}
       </div>
       {previewImg && (
-        <div
-          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
-          onClick={() => setPreviewImg(null)}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center"
         >
-          <img
-            src={previewImg}
-            alt="Preview"
-            className="max-w-full max-h-full object-contain rounded-lg shadow-lg"
-          />
-        </div>
+          <div
+            className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+            onClick={() => setPreviewImg(null)}
+          >
+            <img
+              src={previewImg}
+              alt="Preview"
+              className="max-w-full max-h-full object-contain rounded-lg shadow-lg"
+            />
+          </div>
+        </motion.div>
       )}
     </>
   );

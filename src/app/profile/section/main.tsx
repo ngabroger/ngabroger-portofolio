@@ -11,15 +11,15 @@ export default function MainSection() {
         </h2>
         <div className="h-1 w-82 mt-3 bg-[#00fff7] hero-animate"></div>
         <p className="text-gray-300 mt-3 max-w-sm xl:max-w-none hero-animate">
-          Saya adalah developer web yang fokus pada UI/UX dan animasi modern.
+          I'm a developer who loves turning ideas into reality—whether it's web apps or mobile
         </p>
       </section>
 
       <div className="relative flex flex-col items-center xl:mb-0">
         <div className="absolute -right-4 md:-right-8 top-3 md:top-12 z-30 bg-neutral-900/90 backdrop-blur-sm px-4 py-2 rounded-full border border-[#00fff7]/30 shadow-lg shadow-[#00fff7]/10 hero-animate">
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-[#00fff7] animate-pulse"></div>
-            <p className="text-xs md:text-md  font-medium text-white">Open to internship 🏢</p>
+            <div className="w-2 h-2 rounded-full bg-[#ff003c] animate-pulse shadow-[0_0_8px_#ff003c]"></div>
+            <p className="text-xs md:text-md  font-medium text-white">Close for Working</p>
           </div>
         </div>
 
