@@ -20,16 +20,16 @@ export default function ProfileHeader() {
           experiences!
         </p>
         <div className="flex gap-4 text-secondary">
-          <a href="#">
+          <a href="https://www.youtube.com/@ngabroger">
             <FaYoutube size={24} className=" hover:text-red-600" />
           </a>
-          <a href="#">
+          <a href="https://www.facebook.com/flyrog">
             <FaFacebook size={24} className=" hover:text-blue-600" />
           </a>
-          <a href="#">
+          <a href="https://www.instagram.com/ngabroger">
             <FaInstagram size={24} className=" hover:text-pink-500" />
           </a>
-          <a href="#">
+          <a href="https://github.com/ngabroger">
             <FaGithub size={24} className=" hover:text-gray-500" />
           </a>
         </div>
