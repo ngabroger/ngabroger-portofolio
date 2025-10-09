@@ -22,7 +22,7 @@ export default function HireMeSection() {
           <span>Linkedin</span>
         </a>
         <a
-          href="https://drive.google.com/file/d/1cBzFLH42YglI8xqW8RSV1ZG7tpDFmBxN/view"
+          href="https://drive.google.com/file/d/1GhkPdkwGAlTbF8mRkpbDgVIsab6Lg7gZ/view"
           className="bg-secondary text-sm text-white py-2 px-4 rounded-md hover:bg-neutral-950 transition-colors duration-300"
         >
           <FaFile className="inline mr-2" />
