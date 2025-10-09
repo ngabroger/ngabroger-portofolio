@@ -4,7 +4,7 @@ export default function ProfileHeader() {
     <div className="items-start grid gap-4 justify-start  ">
       <div className="w-16 h-16">
         <img
-          src="/my_image.png"
+          src="/photo_profile.svg"
           alt="Profile Picture"
           className="w-full h-full object-cover rounded-full"
         />
@@ -14,7 +14,7 @@ export default function ProfileHeader() {
           Software Developer, Typewriting , and Designer.
         </h1>
         <p className="text-secondary text-md">
-          Hello there! I’m a programmer from Indonesia, passionate about software
+          Hello there! My name is Roger, a programmer from Indonesia, passionate about software
           development—whether it’s building mobile apps, crafting web solutions, exploring AI, or
           diving into typewriting and design. Always ready to turn ideas into creative digital
           experiences!
