@@ -13,6 +13,9 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: 'Roger Simanjuntak - Portfolio',
   description: 'Welcome to my portfolio website!',
+  icons: {
+    icon: '/logo.svg',
+  },
 };
 
 export default function RootLayout({
