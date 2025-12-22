@@ -202,7 +202,7 @@ export default function PathPage() {
                       Enterprise
                     </span>
                     <span className="text-[10px] px-2 py-1 bg-red-500/20 text-red-400 rounded-md">
-                      Current
+                      Completed
                     </span>
                   </div>
                 </div>
