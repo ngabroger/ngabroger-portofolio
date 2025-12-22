@@ -260,7 +260,7 @@ export default function PathPage() {
                 View My Projects
               </a>
               <a
-                href="/certificate"
+                href="/certificates"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-neutral-800/50 hover:bg-neutral-700/50 border border-neutral-700/50 rounded-xl text-white font-medium transition-all"
               >
                 <IconCertificate size={18} />
