@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { certificates } from '@/app/data/certificates';
+import { certificates } from '../data/certificates';
 import {
   IconWorld,
   IconDeviceMobile,
@@ -132,7 +132,6 @@ export default function CertificatePage() {
           ))}
         </div>
 
-        {/* Empty State */}
         {filteredCerts.length === 0 && (
           <div className="text-center py-20">
             <div className="text-neutral-600 mb-4">
@@ -143,7 +142,6 @@ export default function CertificatePage() {
           </div>
         )}
 
-        {/* Stats */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
             {
