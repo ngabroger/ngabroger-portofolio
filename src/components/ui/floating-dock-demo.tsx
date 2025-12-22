@@ -27,7 +27,7 @@ export function FloatingDockDemo() {
     {
       title: 'Certificate',
       icon: <IconCertificate className="h-full w-full text-neutral-500 dark:text-neutral-300" />,
-      href: '/certificate',
+      href: '/certificates',
     },
 
     {
