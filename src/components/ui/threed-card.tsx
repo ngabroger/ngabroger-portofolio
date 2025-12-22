@@ -115,7 +115,7 @@ export function ThreeDCardDemo() {
                 <IconBrandGithub size={20} />
               </a>
               <a
-                href="https://linkedin.com/in/roger-simanjuntak"
+                href="https://linkedin.com/in/ngabroger"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 bg-neutral-800/50 hover:bg-neutral-700/50 border border-neutral-700/50 hover:border-neutral-600 rounded-lg text-neutral-400 hover:text-blue-400 transition-all duration-300"
