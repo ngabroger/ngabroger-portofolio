@@ -9,16 +9,16 @@ export type Project = {
 };
 
 export const projects: Project[] = [
-  {
-    title: 'SOSCore System',
-    description:
-      'A full-stack SOSCore solution with automation recap integration and admin dashboard.',
-    tags: ['Laravel', 'PostgreSQL', 'Livewire', 'Docker'],
-    image: '/projects/soscoresystem.webp',
-    liveUrl: '#',
-    githubUrl: '#',
-    category: 'Web',
-  },
+  // {
+  //   title: 'SOSCore System',
+  //   description:
+  //     'A full-stack SOSCore solution with automation recap integration and admin dashboard.',
+  //   tags: ['Laravel', 'PostgreSQL', 'Livewire', 'Docker'],
+  //   image: '/projects/soscoresystem.webp',
+  //   liveUrl: '#',
+  //   githubUrl: '#',
+  //   category: 'Web',
+  // },
   {
     title: 'HRIS Mobile App',
     description:
